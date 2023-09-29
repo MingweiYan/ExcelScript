@@ -1,0 +1,25 @@
+{
+  "INPUT_COLUMN_MAPPING": ["no",
+                          "market",
+                          "delivery_unit",
+                          "delivery_address",
+                          "delivery_person",
+                          "delivery_phone",
+                          "num"
+  ],
+  "OUTPUT_POSITION_MAPPING": {
+      "no": [2, 0],
+      "market": [2, 1],
+      "num": [5, 5],
+      "delivery_unit": [12, 0],
+      "delivery_address": [13, 0],
+      "delivery_person": [14, 0],
+      "three": [7, 0],
+      "item": [5, 0]
+  },
+  "OUTPUT_PATH": "output",
+  "TEMPLATE_PATH": "template.docx",
+  "ADDTIONAL_INFO" : {
+    "three": "1、单面四色印刷+专色+专金，覆哑膜，正反面字体元素烫金顶鼓，整体ＵＶ印刷，糊成型； 烫金UV整体尺寸范围内按需调整；\n2、提绳：穿两根400mm金色三股麻花绳，每股里棉纱数量9根，（提绳颜色按需确定），两端马蹄扣外端直径4mm；\n3、袋体：250g白卡纸，尺寸：290*170*330mm（长*宽*高）；\n4、垫片：230g灰底白，尺寸270*160mm，底部粘贴，白面向上；\n5、袋口内折边3cm，内折部分覆膜要求不低于2.5cm，提绳孔与袋体上边距离约2cm。\n工艺描述若有差异以实物标样为准，未尽事宜按照3%误差计算。\n备注：建议客户收货时随机抽检100个数量进行物料标准核验，及时反映问题便于解决。\n"
+  }
+}
