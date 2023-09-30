@@ -111,7 +111,7 @@ def process_docx(line):
 
 
 def load_conf():
-    with open('./setting.json', 'r') as f:
+    with open('./setting.json', 'r', encoding='utf-8') as f:
         conf = json.load(f)
     global INPUT_COLUMN_MAPPING
     global OUTPUT_POSITION_MAPPING
