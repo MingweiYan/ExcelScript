@@ -10,8 +10,9 @@ from docx.oxml.ns import qn
 from docx.enum.style import WD_STYLE_TYPE
 
 """
-    prepare:  pip3 install xlrd3 python-docx pyinstaller
-
+    prepare: pip3 install xlrd3 python-docx pyinstaller
+    package: pyinstaller -F .\processExcel.py 
+             cp .\dist\processExcel.exe .  
 """
 
 OUTPUT_POSITION_MAPPING = dict()
