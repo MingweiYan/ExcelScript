@@ -3,12 +3,22 @@ import os
 
 import xlrd3
 from docx import Document
+from docx.shared import Pt
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+from docx.oxml.ns import qn
+from docx.enum.style import WD_STYLE_TYPE
+
+"""
+    prepare:  pip3 install xlrd3 python-docx pyinstaller
+
+"""
 
 OUTPUT_POSITION_MAPPING = dict()
 INPUT_COLUMN_MAPPING = list()
 OUTPUT_PATH = "./output"
 TEMPLATE_PATH = ""
+title_text = "标题待确定"
 addtion_infos = dict()
 
 """
@@ -80,7 +90,19 @@ def check_output_path():
 def process_docx(line):
     global OUTPUT_POSITION_MAPPING
     global INPUT_COLUMN_MAPPING
+    global addtion_infos
     document = Document(TEMPLATE_PATH)
+
+    ## 处理标题
+    title_paragh = document.paragraphs[1]
+    # 设置段落格式为黑体小二居中
+    title_paragh.text = title_text
+    title_paragh.runs[0].font.name = "Arial"
+    title_paragh.runs[0]._element.rPr.rFonts.set(qn('w:eastAsia'),'黑体')
+    title_paragh.runs[0].font.size = Pt(18)
+    title_paragh.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    ##  处理表格部分
     table = document.tables[0]
     # 补充excel中每一行的信息
     for idx in range(len(line)):
@@ -113,16 +135,18 @@ def process_docx(line):
 def load_conf():
     with open('./setting.json', 'r', encoding='utf-8') as f:
         conf = json.load(f)
-    global INPUT_COLUMN_MAPPING
-    global OUTPUT_POSITION_MAPPING
-    global OUTPUT_PATH
-    global TEMPLATE_PATH
-    global addtion_infos
-    INPUT_COLUMN_MAPPING = conf.get("INPUT_COLUMN_MAPPING")
-    OUTPUT_POSITION_MAPPING = conf.get("OUTPUT_POSITION_MAPPING")
-    OUTPUT_PATH = conf.get("OUTPUT_PATH")
-    TEMPLATE_PATH = conf.get("TEMPLATE_PATH")
-    addtion_infos = conf.get("ADDTIONAL_INFO")
+        global INPUT_COLUMN_MAPPING
+        global OUTPUT_POSITION_MAPPING
+        global OUTPUT_PATH
+        global TEMPLATE_PATH
+        global addtion_infos
+        global title_text
+        INPUT_COLUMN_MAPPING = conf.get("INPUT_COLUMN_MAPPING")
+        OUTPUT_POSITION_MAPPING = conf.get("OUTPUT_POSITION_MAPPING")
+        OUTPUT_PATH = conf.get("OUTPUT_PATH")
+        TEMPLATE_PATH = conf.get("TEMPLATE_PATH")
+        addtion_infos = conf.get("ADDTIONAL_INFO")
+        title_text = conf.get("TITLE")
     pass
 
 def main():
